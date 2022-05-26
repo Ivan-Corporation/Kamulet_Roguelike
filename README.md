@@ -1,6 +1,6 @@
 # Kamulet Roguelike
 
-<h3>Technologies:
+<h4>Technologies:
 <ul>
 <li>Rust language
 <li>
@@ -11,7 +11,7 @@
 <hr/>
 <br>
 
-<h3>
+<h4>
 <u><b>Project Name:</b></u><br/> Kamulet Roguelike
 <hr/>
 <u><b>Short Description:</b></u> <br/>
