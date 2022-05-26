@@ -1,6 +1,7 @@
 # Kamulet Roguelike
 
 <h4>Technologies:
+<br/>
 <ul>
 <li>Rust language
 <li>
@@ -11,14 +12,14 @@
 <hr/>
 <br>
 
-<h4>
-<u><b>Project Name:</b></u><br/> Kamulet Roguelike
+<p>
+<u><b><h4>Project Name:</h4></b></u><br/> Kamulet Roguelike
 <hr/>
-<u><b>Short Description:</b></u> <br/>
+<u><b><h4>Short Description:</h4></b></u> <br/>
 A dungeon crawler with procedurally generated levels, monsters of increasing difficulty,
 and turn-based movement.
 <hr/>
-<u><b>Story:</b></u><br/> 
+<u><b><h4>Story:</h4></b></u><br/> 
 <img src='./village.jpg'>
 A few years ago in the our hero village - "Anzo" was open some cave, non inhabited by humans, in the next night from the wells and caves around come some abominations. At first they just scary villagers and don't give them go outside house at night, but last months monster start to hurt people and even killed one boy
 </br>
@@ -27,8 +28,10 @@ The elder one gather expedition to attack the caves under the village but it's w
 Monsters become even more aggresive and now they just enter village whenever they want. The only hope it's go inside the caves and find what corrupted relic doing this dark stuff.
 </br>
 One night when all people sleep in church (coz now monsters going inside houses) our hero with heart of steel and sad for father with biggest nightmares, wakeup and stealthy go outside, climbed down the church well with hope to find father, what he really found there you will know from the game
+<img src='./cave.jpg'>
+
 <hr/>
-<u><b>Basic Game Loops:</b></u><br/> 
+<u><b><h4>Basic Game Loops:</h4></b></u><br/> 
 <ol>
 <li>Enter dungeon level.
 <li>Explore, revealing the map.
@@ -37,7 +40,7 @@ One night when all people sleep in church (coz now monsters going inside houses)
 <li>Locate the exit to the level - go to 1.
 </ol>
 <hr/>
-<u><b>TODO:</b></u><br/> 
+<u><b><h4>TODO:</h4></b></u><br/> 
 <ul>
 <li>Create a basic dungeon map
 <li>Place the player and let them walk around
