@@ -2,10 +2,11 @@
 
 <h4>Technologies:
 <br/>
+<br/>
 <ul>
 <li>Rust language
-<li>
-<li>
+<li>Bracket-lib - https://github.com/amethyst/bracket-lib
+<li>Legion (ECS) - https://github.com/amethyst/legion
 </ul>
 
 <br>
@@ -62,3 +63,12 @@ One night when all people sleep in church (coz now monsters going inside houses)
 </ul>
 
 </h3>
+<hr>
+Arts: (With some additionals by myself)
+<ul>
+<li>https://opengameart.org/content/unfinished-dungeon-tileset
+<li>https://opengameart.org/content/fantasy-magic-set
+<li>https://opengameart.org/content/fantasy-sword-set
+</ul>
+
+Thanks that book for learn and help! - https://www.goodreads.com/book/show/55961302-hands-on-rust
