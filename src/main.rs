@@ -6,25 +6,24 @@ mod map;
 mod map_builder;
 mod spawner;
 mod systems;
+mod turn_state;
 
 mod prelude {
     pub use bracket_lib::prelude::*;
-    // Entity Components System
     pub use legion::systems::CommandBuffer;
     pub use legion::world::SubWorld;
     pub use legion::*;
     pub const SCREEN_WIDTH: i32 = 80;
     pub const SCREEN_HEIGHT: i32 = 50;
-    pub use crate::camera::*;
-    pub use crate::map::*;
-    pub use crate::map_builder::*;
-    // for layers with camera
     pub const DISPLAY_WIDTH: i32 = SCREEN_WIDTH / 2;
     pub const DISPLAY_HEIGHT: i32 = SCREEN_HEIGHT / 2;
+    pub use crate::camera::*;
     pub use crate::components::*;
+    pub use crate::map::*;
+    pub use crate::map_builder::*;
     pub use crate::spawner::*;
-
     pub use crate::systems::*;
+    pub use crate::turn_state::*;
 }
 
 use prelude::*;
@@ -32,7 +31,9 @@ use prelude::*;
 struct State {
     ecs: World,
     resources: Resources,
-    systems: Schedule,
+    input_systems: Schedule,
+    player_systems: Schedule,
+    monster_systems: Schedule,
 }
 
 impl State {
@@ -42,18 +43,25 @@ impl State {
         let mut rng = RandomNumberGenerator::new();
         let map_builder = MapBuilder::new(&mut rng);
         spawn_player(&mut ecs, map_builder.player_start);
-
+        map_builder
+            .rooms
+            .iter()
+            .skip(1)
+            .map(|r| r.center())
+            .for_each(|pos| spawn_monster(&mut ecs, &mut rng, pos));
         resources.insert(map_builder.map);
         resources.insert(Camera::new(map_builder.player_start));
+        resources.insert(TurnState::AwaitingInput);
         Self {
             ecs,
             resources,
-            systems: build_scheduler(),
+            input_systems: build_input_scheduler(),
+            player_systems: build_player_scheduler(),
+            monster_systems: build_monster_scheduler(),
         }
     }
 }
 
-// What call in eack tick
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
         ctx.set_active_console(0);
@@ -61,16 +69,26 @@ impl GameState for State {
         ctx.set_active_console(1);
         ctx.cls();
         self.resources.insert(ctx.key);
-        self.systems.execute(&mut self.ecs, &mut self.resources);
-        // TODO - Render Draw Buffer
+        let current_state = self.resources.get::<TurnState>().unwrap().clone();
+        match current_state {
+            TurnState::AwaitingInput => self
+                .input_systems
+                .execute(&mut self.ecs, &mut self.resources),
+            TurnState::PlayerTurn => {
+                self.player_systems
+                    .execute(&mut self.ecs, &mut self.resources);
+            }
+            TurnState::MonsterTurn => self
+                .monster_systems
+                .execute(&mut self.ecs, &mut self.resources),
+        }
         render_draw_buffer(ctx).expect("Render error");
     }
 }
 
-// Entry point
 fn main() -> BError {
     let context = BTermBuilder::new()
-        .with_title("Kamulet roguelike")
+        .with_title("Kamulet")
         .with_fps_cap(30.0)
         .with_dimensions(DISPLAY_WIDTH, DISPLAY_HEIGHT)
         .with_tile_dimensions(32, 32)
