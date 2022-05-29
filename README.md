@@ -59,7 +59,7 @@ One night when all people sleep in church (coz now monsters going inside houses)
 <li>Move to a data-driven design for spawning enemies.
 <li>Consider some visual effects to make combat more visceral.
 <li>Consider keeping score.
-<li>Kamulet 
+<li>Kamulet name
 
 </ul>
 
