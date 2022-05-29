@@ -44,12 +44,12 @@ One night when all people sleep in church (coz now monsters going inside houses)
 <hr/>
 <u><b><h3>TODO:</h3></b></u><br/> 
 <ul>
-<li>Create a basic dungeon map
-<li>Place the player and let them walk around
-<li>Spawn monsters, draw them, and let the player kill them by walking into them.
-<li>Add health and a combat system that uses it.
+<li><strike>Create a basic dungeon map</strike>
+<li><strike>Place the player and let them walk around</strike>
+<li><strike>Spawn monsters, draw them, and let the player kill them by walking into them.</strike>
+<li><strike>Add health and a combat system that uses it.</strike>
 <li>Add healing potions.
-<li>Display a “game over” screen when the player dies.
+<li><strike>Display a “game over” screen when the player dies.</strike>
 <li>Add the Amulet of Yala to the level and let the player win by reaching it
 <li>Add Fields-of-View.
 <li>Add more interesting dungeon designs.
@@ -59,6 +59,7 @@ One night when all people sleep in church (coz now monsters going inside houses)
 <li>Move to a data-driven design for spawning enemies.
 <li>Consider some visual effects to make combat more visceral.
 <li>Consider keeping score.
+<li>Kamulet 
 
 </ul>
 
