@@ -39,9 +39,12 @@ impl MapBuilder {
         let mut mb = architect.new(rng);
         apply_prefab(&mut mb, rng);
 
-        mb.theme = match rng.range(0, 2) {
+        mb.theme = match rng.range(0, 5) {
             // Maps themes
             0 => DungeonTheme::new(),
+            1 => LavaTheme::new(),
+            2 => WaterTheme::new(),
+            3 => JungleTheme::new(),
             _ => ForestTheme::new(),
         };
 

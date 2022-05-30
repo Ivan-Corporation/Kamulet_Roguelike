@@ -12,5 +12,6 @@ legion = "=0.3.1"
 serde = { version = "=1.0.115" }
 ron = "=0.6.1"
 
+
 [profile.release]
 lto = "thin"

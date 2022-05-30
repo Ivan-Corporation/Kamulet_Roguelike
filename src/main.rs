@@ -27,6 +27,7 @@ mod prelude {
 }
 
 use prelude::*;
+// use soloud::*;
 
 struct State {
     ecs: World,
@@ -115,7 +116,7 @@ impl State {
                 pos.y = map_builder.player_start.y;
             });
         // Final level
-        if map_level == 2 {
+        if map_level == 4 {
             spawn_amulet_of_yala(&mut self.ecs, map_builder.amulet_start);
         } else {
             let exit_idx = map_builder.map.point2d_to_index(map_builder.amulet_start);
@@ -221,6 +222,24 @@ impl GameState for State {
 }
 
 fn main() -> BError {
+    // let mut sl = Soloud::default()?;
+
+    // let mut wav = audio::Wav::default();
+
+    // wav.load(&std::path::Path::new("sample.wav"))?;
+
+    // sl.play(&wav); // calls to play are non-blocking, so we put the thread to sleep
+    // while sl.voice_count() > 0 {
+    //     std::thread::sleep(std::time::Duration::from_millis(100));
+    // }
+
+    // wav.load(&std::path::Path::new("triage.mp3"))?;
+
+    // sl.play(&wav);
+    // while sl.voice_count() > 0 {
+    //     std::thread::sleep(std::time::Duration::from_millis(100));
+    // }
+
     let context = BTermBuilder::new()
         .with_title("Kamulet")
         .with_fps_cap(30.0)
