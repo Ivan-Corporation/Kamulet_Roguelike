@@ -1,5 +1,7 @@
 # Kamulet Roguelike
 
+## Download release and launch exe file to play ->
+
 <img src='./logs/3.png'>
 <img src='./logs/5.png'>
 <img src='./logs/6.png'>
