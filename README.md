@@ -7,6 +7,8 @@
 <li>Rust language
 <li>Bracket-lib - https://github.com/amethyst/bracket-lib
 <li>Legion (ECS) - https://github.com/amethyst/legion
+<li>Serde
+<li>RON - Rusty object notation
 </ul>
 
 <br>
@@ -50,7 +52,7 @@ One night when all people sleep in church (coz now monsters going inside houses)
 <li><strike>Add health and a combat system that uses it.</strike>
 <li>Add healing potions.
 <li><strike>Display a “game over” screen when the player dies.</strike>
-<li>Add the Amulet of Yala to the level and let the player win by reaching it
+<li>Add the Kamulet to the level and let the player win by reaching it
 <li>Add Fields-of-View.
 <li>Add more interesting dungeon designs.
 <li>Add some dungeon themes.

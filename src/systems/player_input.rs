@@ -7,6 +7,7 @@ use crate::prelude::*;
 #[write_component(Health)]
 #[read_component(Item)]
 #[read_component(Carried)]
+#[read_component(Weapon)]
 pub fn player_input(
     ecs: &mut SubWorld,
     commands: &mut CommandBuffer,
@@ -22,18 +23,29 @@ pub fn player_input(
             VirtualKeyCode::Right => Point::new(1, 0),
             VirtualKeyCode::Up => Point::new(0, -1),
             VirtualKeyCode::Down => Point::new(0, 1),
-            VirtualKeyCode::G => {// (1)
-                let (player, player_pos) = players// (2)
+            VirtualKeyCode::G => {
+                let (player, player_pos) = players
                     .iter(ecs)
-                    .find_map(|(entity, pos)| Some((*entity, *pos)))// (3)
+                    .find_map(|(entity, pos)| Some((*entity, *pos)))
                     .unwrap();
 
-                let mut items = <(Entity, &Item, &Point)>::query();// (4)
+                let mut items = <(Entity, &Item, &Point)>::query();
                 items.iter(ecs)
-                    .filter(|(_entity, _item, &item_pos)| item_pos == player_pos)// (5)
+                    .filter(|(_entity, _item, &item_pos)| item_pos == player_pos)
                     .for_each(|(entity, _item, _item_pos)| {
-                        commands.remove_component::<Point>(*entity);// (6)
-                        commands.add_component(*entity, Carried(player));// (7)
+                        commands.remove_component::<Point>(*entity);
+                        commands.add_component(*entity, Carried(player));
+
+                        if let Ok(e) = ecs.entry_ref(*entity) {
+                            if e.get_component::<Weapon>().is_ok() {// (1)
+                                <(Entity, &Carried, &Weapon)>::query()
+                                .iter(ecs)
+                                .filter(|(_, c, _)| c.0 == player)
+                                .for_each(|(e, c, w)| {
+                                    commands.remove(*e);// (2)
+                                })
+                            }
+                        }
                     }
                 );
                 Point::new(0, 0)
@@ -89,22 +101,22 @@ pub fn player_input(
 }
 
 fn use_item(n: usize, ecs: &mut SubWorld, commands: &mut CommandBuffer) 
--> Point {// (8)
+-> Point {
     let player_entity = <(Entity, &Player)>::query()
                     .iter(ecs)
                     .find_map(|(entity, _player)| Some(*entity))
-                    .unwrap();// (9)
+                    .unwrap();
 
-    let item_entity = <(Entity, &Item, &Carried)>::query()// (10)
+    let item_entity = <(Entity, &Item, &Carried)>::query()
         .iter(ecs)
         .filter(|(_, _, carried)| carried.0 == player_entity)
-        .enumerate()// (11)
-        .filter(|(item_count, (_, _, _))| *item_count == n)// (12)
-        .find_map(|(_, (item_entity, _, _))| Some(*item_entity));// (13)
+        .enumerate()
+        .filter(|(item_count, (_, _, _))| *item_count == n)
+        .find_map(|(_, (item_entity, _, _))| Some(*item_entity));
 
-    if let Some(item_entity) = item_entity {// (14)
+    if let Some(item_entity) = item_entity {
         commands
-            .push(((), ActivateItem{// (15)
+            .push(((), ActivateItem{
                 used_by: player_entity,
                 item: item_entity
             }));

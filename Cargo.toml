@@ -1,6 +1,6 @@
 [package]
 name = "kamulet_roguelike"
-version = "0.2.1"
+version = "0.3.1"
 edition = "2021"
 author = "Koma"
 
@@ -9,3 +9,8 @@ author = "Koma"
 [dependencies]
 bracket-lib = "~0.8.1"
 legion = "=0.3.1"
+serde = { version = "=1.0.115" }
+ron = "=0.6.1"
+
+[profile.release]
+lto = "thin"
